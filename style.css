@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --desk: #ccd2d4;
+    --desk-shadow: #a9b0b3;
+    --body: #26292e;
+    --body-edge: #34383f;
+    --screen: #c3d3bb;
+    --screen-dark: #b3c5aa;
+    --ink: #1e3626;
+    --ghost: rgba(30, 54, 38, 0.14);
+    --key-num: #f2efe9;
+    --key-num-shadow: #c7c1b4;
+    --key-num-text: #24262b;
+    --key-func: #565c66;
+    --key-func-shadow: #383c44;
+    --key-op: #c99a3a;
+    --key-op-shadow: #92701f;
+    --key-equals: #2f6b58;
+    --key-equals-shadow: #1c4636;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: radial-gradient(circle at 50% 30%, var(--desk) 0%, var(--desk-shadow) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.desk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.calculator {
+    width: 340px;
+    background: linear-gradient(160deg, var(--body-edge), var(--body) 40%);
+    border-radius: 28px;
+    padding: 26px 22px 22px;
+    box-shadow:
+        0 30px 60px -20px rgba(0, 0, 0, 0.45),
+        0 2px 0 var(--body-edge) inset,
+        0 -3px 10px rgba(0, 0, 0, 0.35) inset;
+}
+
+.brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 4px 16px;
+    color: #8b9099;
+}
+
+.brand-name {
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #d7dade;
+}
+
+.brand-model {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.screen {
+    background: linear-gradient(180deg, #1c1e22, #101214);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) inset;
+    margin-bottom: 20px;
+}
+
+.screen-inner {
+    position: relative;
+    background: linear-gradient(165deg, var(--screen), var(--screen-dark));
+    border-radius: 8px;
+    padding: 18px 18px 14px;
+    overflow: hidden;
+}
+
+.ghost-digits {
+    position: absolute;
+    top: 44px;
+    right: 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--ghost);
+    user-select: none;
+    pointer-events: none;
+}
+
+.expression {
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: rgba(30, 54, 38, 0.65);
+    text-align: right;
+    min-height: 18px;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.result {
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+    letter-spacing: 2px;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    line-height: 1.1;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.key {
+    border: none;
+    border-radius: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 0;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+}
+
+.key:active {
+    transform: translateY(3px);
+}
+
+.key--num {
+    background: var(--key-num);
+    color: var(--key-num-text);
+    box-shadow: 0 4px 0 var(--key-num-shadow);
+}
+
+.key--num:active {
+    box-shadow: 0 1px 0 var(--key-num-shadow);
+}
+
+.key--zero {
+    grid-column: span 1;
+}
+
+.key--func {
+    background: var(--key-func);
+    color: #f2efe9;
+    box-shadow: 0 4px 0 var(--key-func-shadow);
+    font-size: 15px;
+}
+
+.key--func:active {
+    box-shadow: 0 1px 0 var(--key-func-shadow);
+}
+
+.key--op {
+    background: var(--key-op);
+    color: #2a2007;
+    box-shadow: 0 4px 0 var(--key-op-shadow);
+    font-size: 20px;
+}
+
+.key--op:active {
+    box-shadow: 0 1px 0 var(--key-op-shadow);
+}
+
+.key--op.is-active {
+    filter: brightness(1.15);
+    box-shadow: 0 1px 0 var(--key-op-shadow);
+    transform: translateY(3px);
+}
+
+.key--equals {
+    background: var(--key-equals);
+    color: #f2efe9;
+    box-shadow: 0 4px 0 var(--key-equals-shadow);
+    font-size: 22px;
+}
+
+.key--equals:active {
+    box-shadow: 0 1px 0 var(--key-equals-shadow);
+}
+
+.result.pulse {
+    animation: pulse 0.25s ease;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.hint {
+    font-size: 12px;
+    color: #6b7075;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        width: 100%;
+        max-width: 340px;
+    }
+}
